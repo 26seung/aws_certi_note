@@ -63,6 +63,46 @@ VPC 에서 인스턴스를 시작할 때 `최대 5개의 보안 그룹` 에 인�
 - PORT 허용
     - 트래픽이 지나갈 수 있는 `Port` 와 `Source` 를 설정 가능
     - Deny 는 불가능  ->  `NACL` 로 가능함
+- 인스턴스 단위
+    - 하나의 인스턴스에 하나 이상의 SG설정 가능
+    - NACL 의 경우 서브넷 단위
+    - 설정된 Instance 는 설정한 모든 SG의 룰을 적용 받음
+- 설정된 모든 룰을 사용해서 필터링
+    - NACL의 경우 적용된 룰의 순서대로 필터링
+- Stateful
+    - Inbound 로 들어온 트래픽이 별 다른 Outbound 설정 없이 나갈 수 있음
+    - NACL 은 Stateless
+- Stateless / Stateful 
+    - Stateless : client 와 server 의 동작, `상태정보를 저장하지 않는 형태`, server의 응답이 client와의 세션 상태와 독립적임
+        - 장점 : 서버가 client정보를 저장관리 하지 않으므로 Scaling이 자유로움
+    - Stateful : client와 server의 동작, `상태정보를 저장하는 형태`, 세션 상태에 기반하여 server의 응답이 달라짐
+
+---
+
+### ELB (Elastic Load Balancer)
+
+Elastic Load Balancing 은 들어오는 애플리케이션 트래픽을 Amazon EC2 인스턴스, 컨테이너, IP주소, Lambda 함수와 같은 여러 대상에 자동으로 `분산` 시킵니다. Elastic Load Balancing 은 단일 가용 영역 또는 여러 가용 영역에서 다양한 애플리케이션 부하를 처리할 수 있습니다. Elastic Load Balancing 이 제공하는 세 가지 로드 밸런서는 모두 애플리케이션의 내결함성에 필요한 `고가용성, 자동확장/축소, 강력한 보안` 을 갖추고 있습니다. 
+
+- IP 가 지속적으로 바뀜
+    - 지속적으로 IP주소가 바뀜
+    - 따라서 도메인 기반으로 사용해야 함
+- Health Check
+    - 직접 트래픽을 발생시켜 Instance 가 살아있는지를 체크함
+    - InService, OutoService 두가지 상태로 나누어 짐
+- 3가지 종류가 존재함
+    - Application Load Balancer
+    - Network Load Balancer
+    - Classic Load Balancer
+- Application Load Balancer
+    - Application Level
+    - "똑똑한 놈"
+- Network Load Balancer
+    - "빠른 놈"
+    - Elastic IP 할당 기능
+- Classic Load Balancer
+    - "옜날 놈"
+    
+
 
 ---
 <br>

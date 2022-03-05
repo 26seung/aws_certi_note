@@ -83,26 +83,56 @@ VPC 에서 인스턴스를 시작할 때 `최대 5개의 보안 그룹` 에 인�
 
 Elastic Load Balancing 은 들어오는 애플리케이션 트래픽을 Amazon EC2 인스턴스, 컨테이너, IP주소, Lambda 함수와 같은 여러 대상에 자동으로 `분산` 시킵니다. Elastic Load Balancing 은 단일 가용 영역 또는 여러 가용 영역에서 다양한 애플리케이션 부하를 처리할 수 있습니다. Elastic Load Balancing 이 제공하는 세 가지 로드 밸런서는 모두 애플리케이션의 내결함성에 필요한 `고가용성, 자동확장/축소, 강력한 보안` 을 갖추고 있습니다. 
 
-- IP 가 지속적으로 바뀜
-    - 지속적으로 IP주소가 바뀜
-    - 따라서 도메인 기반으로 사용해야 함
-- Health Check
-    - 직접 트래픽을 발생시켜 Instance 가 살아있는지를 체크함
-    - InService, OutoService 두가지 상태로 나누어 짐
-- 3가지 종류가 존재함
+- ELB 의 특징
+    - IP 가 지속적으로 바뀜
+        - 지속적으로 IP주소가 바뀜
+        - 따라서 도메인 기반으로 사용해야 함
+    - Health Check
+        - 직접 트래픽을 발생시켜 Instance 가 살아있는지를 체크함
+        - InService, OutoService 두가지 상태로 나누어 짐
+    - 3가지 종류가 존재함
+        - Application Load Balancer
+        - Network Load Balancer
+        - Classic Load Balancer
+- ELB 의 종류
     - Application Load Balancer
+        - Application Level
+        - "똑똑한 놈"
     - Network Load Balancer
+        - "빠른 놈"
+        - Elastic IP 할당 기능
     - Classic Load Balancer
-- Application Load Balancer
-    - Application Level
-    - "똑똑한 놈"
-- Network Load Balancer
-    - "빠른 놈"
-    - Elastic IP 할당 기능
-- Classic Load Balancer
-    - "옜날 놈"
+        - "옜날 놈"
+- Sticky Session
+    - 첫 request에 대한 응답을 준 서버에 껌딱지처럼 붙어있는 것!
+    - 특정 세션의 요청을 처음 처리한 서버로만 보내는 것
     
-a
+
+#### Vertical Scale
+
+수직 확장 은 요청 시 서버에 더 많은 리소스(CPU/RAM/DISK)를 추가하는 것을 의미한다. (데이터베이스 또는 애플리케이션 서버는 여전히 하나임). 
+
+Vertical Scaling 은 중소기업은 물론 중견기업의 애플리케이션 및 제품에서 가장 일반적으로 사용됩니다. Virtual Scaling 의 가장 일반적인 예 중 하나는 값비싼 하드웨어를 구입하여 VMWare ESX(가상 머신 하이퍼바이저)로 사용하는 것입니다.
+
+수직적 확장 은 일반적으로 서버 하드웨어의 업그레이드를 의미합니다. 수직으로 확장해야 하는 몇 가지 이유에는 IOPS(입력/출력 작업) 증가, CPU/RAM 용량 및 디스크 용량 확장이 포함됩니다.
+
+그러나 가상화를 사용한 후에도 성능 향상을 목표로 할 때마다 수평 확장을 사용하는 것보다 가동 중지 시간의 위험이 훨씬 더 큽니다.
+
+#### Horizontal Scale
+
+수평적 확장 은 (서버) 서비스의 고가용성이 필요할 때마다 반드시 사용해야 하는 기술입니다.
+
+수평 확장 에는 서버나 데이터베이스에 처리 장치나 물리적 시스템을 더 추가하는 작업이 포함됩니다. 여기에는 클러스터의 노드 수를 늘리고 키 공간을 더 넓게 확장하고 클라이언트 연결을 위한 추가 끝점을 제공하여 각 구성원 노드의 책임을 줄이는 것이 포함됩니다. 수평적 확장은 역사적으로 높은 수준의 컴퓨팅과 애플리케이션 및 서비스에 훨씬 더 많이 사용되었습니다.
+
+이는 개별 노드의 용량에 영향을 미치지는 않지만 개별 서버 노드 간의 분산으로 인해 부하가 감소합니다.
+
+---
+
+### Auto Scaling
+
+
+
+
 
 ---
 <br>
